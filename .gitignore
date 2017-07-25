@@ -1,8 +1,5 @@
 /node_modules
-/bower_components
-input.html
 .idea/
-/dataBankClient/appdist
 /build
 /rev
 rev-manifest.json

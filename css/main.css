@@ -1,3 +1,824 @@
-html ,body{
-    background: red;
+/*@media screen and (min-width: 320px) {
+    html {
+        font-size: 7px
+    }
+}
+@media screen and (max-width: 350px) {
+    html {
+        font-size: 8px
+    }
+}
+@media screen and (min-width: 351px) {
+    html {
+        font-size: 9px
+    }
+}
+
+@media screen and (min-width: 375px) {
+    html {
+        font-size: 10px
+    }
+}*/
+
+* {
+    font-family: "Microsoft Yahei", Helvetica, arial, sans-serif, FontAwesome !important;
+    /*font-size: 10px;*/
+    font-size: 1rem;
+    color: white;
+}
+
+#nav {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9000;
+    width: 100%;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    background: #024675;
+}
+
+#nav>ul {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#nav>ul>li {
+    height: 100%;
+    padding: 0;
+}
+
+#nav>ul>li>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#nav>ul>li>a .icon {
+    font-size: 1.5rem;
+}
+
+.switch-btn-group {
+    z-index: 2000;
+    position: absolute;
+    top: 135%;
+    width: 100%;
+}
+
+#nav>ul>li>a .title {
+    font-size: 1.2rem;
+}
+
+#nav>ul>li>a>p {
+    margin: 0;
+}
+
+#nav>ul>li.active a {
+    background-color: #01a1dd;
+}
+
+.changeUnit {
+    text-align: right;
+}
+
+.user {
+    position: relative;
+    margin: 0 25%;
+    text-align: center;
+}
+
+.user .portrait {
+    display: inline-block;
+    width: 30%;
+    border: 2px solid red;
+    border-radius: 50%;
+}
+
+.user .userInfo {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.user .userInfo .userName {
+    font-size: 1.7rem;
+}
+
+.user .userInfo .myPhone {
+    font-size: 1rem;
+}
+
+.user .userInfo .dataValue {
+    font-size: 1.4rem;
+}
+
+.poolBall {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    width: 100%;
+}
+
+.pool .text {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.phoneDetail {
+    text-align: center;
+}
+
+.phoneDetail .phone {
+    font-size: 1.2rem;
+}
+
+.phoneDetail .phoneInput {
+    background-color: transparent;
+    width: 12rem;
+    height: 3rem;
+    /*width:11rem;*/
+    /*height:3rem;*/
+    border-radius: 20px;
+    text-align: center;
+    font-size: 1.6rem;
+    /*font-size:1.5rem;*/
+}
+
+
+/*@media screen and (max-width: 350px) {
+    .phoneDetail .phoneInput {
+        width: 17rem;
+    }
+}
+@media screen and (min-width: 351px) {
+    .phoneDetail .phoneInput {
+        width: 16rem;
+    }
+}*/
+
+.defaultPoint {
+    margin: 0;
+    text-align: center;
+}
+
+.defaultPoint span {
+    font-size: 1rem;
+}
+
+.dataBall {
+    font-size: 1.5rem;
+}
+
+.button {
+    margin-top: 2rem;
+}
+
+.border {
+    min-height: 0.4rem;
+    border-bottom: 2px solid #a9a9a9;
+}
+
+.userButtons .userButton {
+    border-bottom: 1px solid #a9a9a9;
+}
+
+.userButtons .userButton .col-xs-9 {
+    margin: 0.4rem 0;
+}
+
+table {
+    font-size: 1rem;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:focus {
+    color: #01a1dd;
+}
+
+
+/*znx final add*/
+
+
+/*body {*/
+
+
+/*background: url("../images/base/bg.png");*/
+
+
+/*background-size: cover;*/
+
+
+/*}*/
+
+
+/*zsh add*/
+
+.userBox {
+    padding: 8% 20%;
+    text-align: center;
+}
+
+.userBox .userName {
+    font-size: 1.7rem;
+    ;
+}
+
+.head-img img {
+    box-shadow: 0 0 5px #fff;
+}
+
+.userEntry {
+    text-align: center;
+    padding-top: 8%;
+    ;
+    padding-bottom: 10%;
+}
+
+.button div {
+    text-align: center;
+}
+
+.bottomBtn {
+    width: 120px;
+    height: 40px;
+    background: transparent;
+    border-radius: 8px;
+}
+
+.userCenter {
+    background: url("../assets/images/userCenter/index/bg.png");
+    background-size: cover;
+}
+
+.Tab {
+    text-align: center;
+    width: 90%;
+    padding: 5%;
+    margin: 5% auto 0 auto;
+}
+
+.userBox {}
+
+.tianzige {
+    background: url("../assets/images/userCenter/index/line.png");
+    background-size: contain;
+    margin-top: 10%
+}
+
+.tableBody {
+    position: relative;
+    top: 15%;
+    overflow: scroll;
+    height: 70%;
+    width: 100%;
+}
+
+.ruleBody {
+    position: relative;
+    top: -5%;
+    overflow: scroll;
+    height: 92%;
+    width: 100%;
+}
+
+.ruleBody h5 {
+    text-align: center;
+}
+
+.ruleBody ol li {
+    text-indent: -1rem;
+    padding: 0 2rem;
+}
+
+.tableBody tr {
+    height: 35px;
+    width: 100%;
+    vertical-align: baseline;
+}
+
+.tableBody ul {
+    padding: 0;
+    margin: 0;
+}
+
+.tableBody ul li {
+    list-style: none;
+    width: 100%;
+    height: 35px;
+    position: relative;
+    padding: 0 2px;
+}
+
+.tableBody ul li span {
+    /*width: 20%;*/
+    height: 100%;
+    display: inline-block;
+    vertical-align: baseline;
+    margin: 0;
+    text-align: center;
+}
+
+.tableBody ul li button {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 2000;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    height: inherit;
+}
+
+.infoTable {
+    background-size: contain;
+    height: 60%;
+}
+
+.introBtn {
+    position: absolute;
+    text-align: center;
+    bottom: 2rem;
+}
+
+.rechargeBtn {
+    text-align: center;
+    margin-top: 1rem;
+    bottom: 15%;
+    position: fixed;
+    width: 100%;
+}
+
+
+/*积分一键兑按钮*/
+
+.rechargeBtn .btn-big {
+    display: inline-block;
+    background: transparent;
+    color: white;
+    line-height: 2rem;
+    font-size: 1.2rem;
+    border: 1px solid white;
+    border-radius: 18px;
+    width: 35%;
+    margin: 0 5%;
+}
+
+.rechargeBtn button[disabled] {
+    opacity: 0.5;
+}
+
+.rechargeBtn .tab {
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.rechargeBtn .tab a {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    margin: 0 1rem;
+    /*font-size:1.4rem;*/
+    width: 4rem;
+    line-height: 1.5rem;
+}
+
+.rechargeBtn .tab a.active {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px;
+    border-radius: 6px;
+}
+
+
+/*iPhone 6s*/
+
+
+/*@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : portrait) {
+    .rechargeBtn .tab {
+        margin-bottom: 1.4rem;
+    }
+}
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation : portrait) {
+    .rechargeBtn .tab {
+        margin-bottom: 2rem;
+    }
+}*/
+
+.rule {
+    margin: 0 10%;
+}
+
+.todo {
+    padding: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.todo .sl {
+    font-size: 2rem;
+    ;
+}
+
+.channel {
+    margin: 3% auto;
+}
+
+.bottomBtn {
+    background: transparent;
+    color: white;
+    border-radius: 25px;
+    width: 60%;
+    height: 35px;
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    border: solid #ffffff;
+}
+
+#dropUp {
+    background-color: #01a1dd;
+    display: block;
+    position: absolute;
+    /*bottom: 4rem;*/
+    /*height: 9rem;*/
+    bottom: 3.6rem;
+    left: 33.3%;
+    width: 33.3%;
+    z-index: 10000;
+}
+
+#dropUp li {
+    /*margin: 2.645rem 0;*/
+    display: block;
+    height: 4.5rem;
+    line-height: 4.5rem;
+}
+
+#dropUp>ul {
+    padding: 0;
+    text-align: center;
+}
+
+.circles-text {
+    font-size: 4rem!important;
+}
+
+.circles-wrp {
+    z-index: 2000;
+    position: relative;
+    /*top: 5rem;*/
+    /*padding: 0 5rem;*/
+    width: 100%;
+    display: block;
+}
+
+.ballPrice {
+    backgroud-color: rgba(255, 255, 255, 0.3);
+    margin: 0 30%;
+    border-radius: 20px;
+}
+
+.ballPricePoint {
+    white-space: nowrap;
+}
+
+img.bgRound {
+    position: absolute;
+    left: 0;
+    top: -32.5%;
+    width: 100%;
+    /*left: -34%;*/
+}
+
+
+/*********************************************JY********************************************/
+
+.modal {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+}
+
+.modal-content {
+    margin: 20px;
+}
+
+.modal-content .modal-body {
+    padding: 0;
+}
+
+.exchangeSuccess span {
+    font-size: 1.2rem;
+}
+
+.tableList {
+    height: 350px;
+    background-color: #009cdb;
+}
+
+.tableListDetail {
+    height: 280px;
+    overflow: scroll;
+    border-radius: 5px;
+    position: relative;
+}
+
+.tableListDetail .closeBtn {
+    position: absolute;
+    bottom: 15px;
+}
+
+.tableListDetail table tr {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.tableListDetail table tbody tr {
+    height: 30px!important;
+    line-height: 30px!important;
+}
+
+.tableListDetail table tbody tr td {
+    height: 30px!important;
+    line-height: 30px!important;
+}
+
+.buySuccess span {
+    font-size: 1.5em;
+    line-height: 30px;
+}
+
+.circles-text {
+    font-size: 1rem;
+}
+
+
+/*********************************************modal********************************************/
+
+.modalContent {
+    position: relative
+}
+
+.modalContent .wenxintishi img {
+    width: 100%
+}
+
+.modalContent .textAndButton {
+    position: absolute;
+    top: 30%;
+    z-index: 999;
+    text-align: center;
+    padding: 0 10%;
+    width: 100%
+}
+
+.modalContent .textAndButton>div:first-child {
+    height: 8rem;
+}
+
+.modalContent .textAndButton p {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.modalContent .textAndButton p>span {
+    font-size: 1.6rem;
+}
+
+.modalContent .textAndButton .modalCloseBtn {
+    text-align: center;
+    margin-top: 4rem;
+    width: 100%;
+}
+
+
+/*********************积分不足模态框**************************/
+
+.noCardPointBtn a {
+    color: white;
+    border: 1px solid;
+    /*float: left;*/
+    width: 150px;
+    line-height: 2rem;
+    display: block;
+    font-size: 16px;
+    border-radius: 15px;
+    font-weight: 200;
+    margin: 1.6rem auto;
+}
+
+.noCardPointBtn {
+    /*textAlign:'center',marginTop:'3rem'*/
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
+/*iPhone 6s*/
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+    .noCardPointBtn a {
+        width: 150px;
+        line-height: 28px;
+        font-size: 18px;
+        margin: 20px auto;
+    }
+    .noCardPointBtn {
+        margin-top: 18px;
+    }
+}
+
+
+/*iPhone 6 plus*/
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: portrait) {
+    .noCardPointBtn a {
+        width: 160px;
+        line-height: 35px;
+        font-size: 18px;
+        margin: 24px auto;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+    }
+    .noCardPointBtn {
+        margin-top: 30px;
+    }
+}
+
+
+/*******************境外流量*********************/
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 567px) and (orientation: portrait) {
+    /*小屏幕*/
+    .oversea-ball {
+        top: 60%;
+    }
+}
+
+.oversea-ball {
+    display: block;
+    width: 8rem;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    z-index: 10000;
+    text-align: center;
+    margin-left: -4rem;
+    /*抵消掉操蛋的bootstrap container padding-left*/
+}
+
+.oversea-ball img {
+    width: 100%;
+}
+
+#PullDown {
+    margin: 0px;
+    height: 1rem;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    /*background-color: white;*/
+    line-height: 1rem;
+}
+
+#PullUp {
+    margin-top: 10px;
+    height: 1rem;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    /*background-color: white;*/
+    line-height: 1rem;
+}
+
+#ListOutsite {
+    position: relative;
+    overflow: auto;
+}
+
+#ListInside {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 120%;
+}
+
+
+/*#ListInside li {*/
+
+
+/*height: 80px;*/
+
+
+/*padding: 0 10%;*/
+
+
+/*width: 80%;*/
+
+
+/*vertical-align: middle;*/
+
+
+/*line-height: 80px;*/
+
+
+/*font-size: 18px;*/
+
+
+/*border: 1px solid lightsteelblue;*/
+
+
+/*overflow: hidden;*/
+
+
+/*background-color: blanchedalmond;*/
+
+
+/*}*/
+
+#typenum li {
+    padding: 2px;
+    font-size: 17px;
+    border-top: 1px solid #d4c7c7;
+}
+
+.allow-add-style span {
+    font-size: 1.3rem;
+}
+
+.remind-add-style span {
+    font-size: 1.3rem;
+}
+
+@media only screen and (max-width: 375px) {
+    /*小屏幕*/
+    .quota-bottom {
+        margin-top: -2%;
+        margin-bottom: 5%;
+    }
+}
+
+@media only screen and (min-width: 414px) {
+    /*小屏幕*/
+    .quota-bottom {
+        margin-top: -0.6rem;
+        margin-bottom: 9%;
+    }
+}
+
+.overdueFlag {
+    display: block;
+    background: #f00;
+    border-radius: 50%;
+    width: 0.8em;
+    height: 0.8em;
+    top: 59%;
+    right: 87%;
+    position: absolute;
+}
+
+.quota-detail {
+    white-space: nowrap;
+    height: 9rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.quota-detail-title {
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.quota-detail-title div {
+    font-size: 1.5rem;
+}
+
+.quota-detail-content {
+    border-bottom: 1px solid #1e7cbb;
+}
+
+.quota-detail div {
+    font-size: 1.4rem;
+}
+
+.overdue-style span {
+    font-size: 1.7rem;
 }
