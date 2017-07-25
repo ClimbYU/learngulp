@@ -1,14 +1,16 @@
 /**
  * Created by Administrator on 2017/5/11 0011.
  */
-//ÒıÈëgulpºÍgulp²å¼ş
+//å¼•å…¥gulpå’Œgulpæ’ä»¶
 var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     rev = require('gulp-rev');
 var assetRev = require('gulp-asset-rev');
 var revCollector = require('gulp-rev-collector');
-
-/* TODO ¿ÉÒÔÉú³Éhtml£¬µ«Î´Éú³É¶ÔÓ¦µÄjsÓëcss
+var uglify = require('gulp-uglify');
+var cssnano = require('gulp-cssnano');
+var htmlmin = require('gulp-htmlmin');
+/* TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½htmlï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½É¶ï¿½Ó¦ï¿½ï¿½jsï¿½ï¿½css
  gulp.task('rev',['revCss'],function() {
     gulp.src("./template/index.html")
         .pipe(assetRev())
@@ -29,65 +31,90 @@ gulp.task('default',['rev']);
 
 
 
-//¶¨Òåcss¡¢jsÔ´ÎÄ¼şÂ·¾¶
+//å®šä¹‰cssã€jsæºæ–‡ä»¶è·¯å¾„
 var cssSrc = 'css/*.css',
     jsSrcScript = 'script/*.js',
-    jsSrcJS = 'js/*/*.js';
+    jsSrcJS = ['js/main/*.js','js/test/*.js','js/script/*.js'];
 
-//ÎªcssÖĞÒıÈëµÄÍ¼Æ¬/×ÖÌåµÈÌí¼Óhash±àÂë
-gulp.task('assetRev', function(){
-    return gulp.src(cssSrc)  //¸ÃÈÎÎñÕë¶ÔµÄÎÄ¼ş
-        .pipe(assetRev());//¸ÃÈÎÎñµ÷ÓÃµÄÄ£¿é
-        //.pipe(gulp.dest('src/css')); //±àÒëºóµÄÂ·¾¶
-});
+//Îªcssï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½hashï¿½ï¿½ï¿½ï¿½
+// gulp.task('assetRev', function(){
+//     return gulp.src(cssSrc)  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½Ä¼ï¿½
+//         .pipe(assetRev());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ä£ï¿½ï¿½
+//         //.pipe(gulp.dest('src/css')); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+// });
 
-//CSSÉú³ÉÎÄ¼şhash±àÂë²¢Éú³É rev-manifest.jsonÎÄ¼şÃû¶ÔÕÕÓ³Éä
+//CSSç”Ÿæˆæ–‡ä»¶hashç¼–ç å¹¶ç”Ÿæˆ rev-manifest.jsonæ–‡ä»¶åå¯¹ç…§æ˜ å°„
 gulp.task('revCss', function(){
     return gulp.src(cssSrc)
+        .pipe(cssnano())
         .pipe(rev())
+        .pipe(gulp.dest('build/css'))
         .pipe(rev.manifest())
-        .pipe(gulp.dest('rev/css'));
+        .pipe(gulp.dest('build/rev/css'));
 });
 
 
-//jsÉú³ÉÎÄ¼şhash±àÂë²¢Éú³É rev-manifest.jsonÎÄ¼şÃû¶ÔÕÕÓ³Éä
+//jsç”Ÿæˆæ–‡ä»¶hashç¼–ç å¹¶ç”Ÿæˆ rev-manifest.jsonæ–‡ä»¶åå¯¹ç…§æ˜ å°„
 gulp.task('revJs', function(){
-    return gulp.src([jsSrcJS,jsSrcScript])
+    // return gulp.src(['js/*/*.js', 'script/*.js'])
+    //     .pipe(uglify())
+    //     .pipe(rev())
+    //     .pipe(gulp.dest('build/'))
+    //     .pipe(rev.manifest())
+    //     .pipe(gulp.dest('build/rev/js'));
+    return gulp.src(jsSrcJS, {base: 'js'})
+        //.pipe(gulp.dest('build/assets'))   //ï¿½Å¿ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½jsï¿½ï¿½cssï¿½Ä¼ï¿½
+        .pipe(uglify())
         .pipe(rev())
+        .pipe(gulp.dest('build/js'))
         .pipe(rev.manifest())
-        .pipe(gulp.dest('rev/js'));
-});
+        .pipe(gulp.dest('build/rev/js'));
+});    
 
-
-//HtmlÌæ»»css¡¢jsÎÄ¼ş°æ±¾
+//Htmlæ›¿æ¢cssã€jsæ–‡ä»¶ç‰ˆæœ¬
 gulp.task('revHtml', function () {
-    return gulp.src(['rev/**/*.json', 'template/*.html'])
+    return gulp.src(['build/rev/**/*.json', 'template/*.html'])
+        
         .pipe(revCollector())
-        .pipe(gulp.dest('views'));
-});
+        .pipe(gulp.dest('build'));
+}); 
 
-gulp.task('revCssJs', function () {
-    // by default, gulp would pick `assets/css` as the base,
-    // so we need to set it explicitly:
-    return gulp.src(['css/*.css', 'js/*/*.js', 'script/*.js'], {base: 'assets'})
-        //.pipe(gulp.dest('build/assets'))   //·Å¿ªÊ±»áÉú³ÉÔ­Ê¼µÄjsÓëcssÎÄ¼ş
-        .pipe(rev())
-        .pipe(gulp.dest('build/assets'))
-        .pipe(rev.manifest({
-            base: 'build/assets',
-            merge: true // merge with the existing manifest (if one exists)
-        }))
-        .pipe(gulp.dest('build/assets'));
-});
-//¿ª·¢¹¹½¨  ·Å¿ªÊ±¿ÉÒÔ½«htmlÎÄ¼şÉú³É´øÓĞ°æ±¾ºÅµÄÎÄ¼ş
+// gulp.task('revSrcJs', function () {
+//     // by default, gulp would pick `assets/css` as the base,
+//     // so we need to set it explicitly:
+//     return gulp.src([ 'js/*/*.js', 'script/*.js'], {base: 'assets'})
+//         //.pipe(gulp.dest('build/assets'))   //ï¿½Å¿ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½jsï¿½ï¿½cssï¿½Ä¼ï¿½
+//         .pipe(uglify())
+//         .pipe(rev())
+//         .pipe(gulp.dest('build/assets'))
+//         .pipe(rev.manifest({
+//             base: 'build/assets',
+//             merge: true // merge with the existing manifest (if one exists)
+//         }))
+//         .pipe(gulp.dest('build/assets'));
+// });
+// gulp.task('revSrcCss', function () {
+//     // by default, gulp would pick `assets/css` as the base,
+//     // so we need to set it explicitly:
+//     return gulp.src(['css/*.css'])
+//         //.pipe(gulp.dest('build/assets'))   //ï¿½Å¿ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½jsï¿½ï¿½cssï¿½Ä¼ï¿½
+//         .pipe(cssnano())
+//         .pipe(rev())
+//         .pipe(gulp.dest('build/css'))
+//         .pipe(rev.manifest({
+//             base: 'build/css',
+//             merge: true // merge with the existing manifest (if one exists)
+//         }))        
+//         .pipe(gulp.dest('build/css'));
+// });    
+   
 gulp.task('default', function (done) {
     condition = false;
-    runSequence(    //ĞèÒªËµÃ÷µÄÊÇ£¬ÓÃgulp.runÒ²¿ÉÒÔÊµÏÖÒÔÉÏËùÓĞÈÎÎñµÄÖ´ĞĞ£¬Ö»ÊÇgulp.runÊÇ×î´óÏŞ¶ÈµÄ²¢ĞĞÖ´ĞĞÕâĞ©ÈÎÎñ£¬¶øÔÚÌí¼Ó°æ±¾ºÅÊ±ĞèÒª´®ĞĞÖ´ĞĞ£¨Ë³ĞòÖ´ĞĞ£©ÕâĞ©ÈÎÎñ£¬¹ÊÊ¹ÓÃÁËrunSequence.
-        ['assetRev'],
+    //éœ€è¦è¯´æ˜çš„æ˜¯ï¼Œç”¨gulp.runä¹Ÿå¯ä»¥å®ç°ä»¥ä¸Šæ‰€æœ‰ä»»åŠ¡çš„æ‰§è¡Œï¼Œåªæ˜¯gulp.runæ˜¯æœ€å¤§é™åº¦çš„å¹¶è¡Œæ‰§è¡Œè¿™äº›ä»»åŠ¡ï¼Œè€Œåœ¨æ·»åŠ ç‰ˆæœ¬å·æ—¶éœ€è¦ä¸²è¡Œæ‰§è¡Œï¼ˆé¡ºåºæ‰§è¡Œï¼‰è¿™äº›ä»»åŠ¡ï¼Œæ•…ä½¿ç”¨äº†runSequence.
+    runSequence(   
         ['revCss'],
         ['revJs'],
-        ['revHtml'],
-        ['revCssJs'],
+        ['revHtml'], 
         done);
 });
 
@@ -136,11 +163,11 @@ gulp.task('default', function (done) {
 //        }) )
 //        .pipe( gulp.dest('dist') );
 //});
-//¶¨Òåcss¡¢jsÎÄ¼şÂ·¾¶£¬ÊÇ±¾µØcss,jsÎÄ¼şµÄÂ·¾¶£¬¿É×ÔĞĞÅäÖÃ
+//ï¿½ï¿½ï¿½ï¿½cssï¿½ï¿½jsï¿½Ä¼ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½css,jsï¿½Ä¼ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //var cssUrl = './css/*.css',
 //    jsUrl = './js/*.js';
 //
-////CSSÉú³ÉÎÄ¼şhash±àÂë²¢Éú³É rev-manifest.jsonÎÄ¼şÃû¶ÔÕÕÓ³Éä
+////CSSï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½hashï¿½ï¿½ï¿½ë²¢ï¿½ï¿½ï¿½ï¿½ rev-manifest.jsonï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½
 //gulp.task('revCss', function(){
 //    return gulp.src(cssUrl)
 //        .pipe(rev())
@@ -148,7 +175,7 @@ gulp.task('default', function (done) {
 //        .pipe(gulp.dest('rev/css'));
 //});
 //
-////jsÉú³ÉÎÄ¼şhash±àÂë²¢Éú³É rev-manifest.jsonÎÄ¼şÃû¶ÔÕÕÓ³Éä
+////jsï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½hashï¿½ï¿½ï¿½ë²¢ï¿½ï¿½ï¿½ï¿½ rev-manifest.jsonï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½
 //gulp.task('revJs', function(){
 //    return gulp.src(jsUrl)
 //        .pipe(rev())
@@ -156,14 +183,14 @@ gulp.task('default', function (done) {
 //        .pipe(gulp.dest('rev/js'));
 //});
 //
-////Html¸ü»»css¡¢jsÎÄ¼ş°æ±¾
+////Htmlï¿½ï¿½ï¿½ï¿½cssï¿½ï¿½jsï¿½Ä¼ï¿½ï¿½æ±¾
 //gulp.task('revHtml', function () {
-//    return gulp.src(['rev/**/*.json', './views/*.html'])  /*WEB-INF/viewsÊÇ±¾µØhtmlÎÄ¼şµÄÂ·¾¶£¬¿É×ÔĞĞÅäÖÃ*/
+//    return gulp.src(['rev/**/*.json', './views/*.html'])  /*WEB-INF/viewsï¿½Ç±ï¿½ï¿½ï¿½htmlï¿½Ä¼ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 //        .pipe(revCollector())
-//        .pipe(gulp.dest('./views'));  /*Html¸ü»»css¡¢jsÎÄ¼ş°æ±¾,WEB-INF/viewsÒ²ÊÇºÍ±¾µØhtmlÎÄ¼şµÄÂ·¾¶Ò»ÖÂ*/
+//        .pipe(gulp.dest('./views'));  /*Htmlï¿½ï¿½ï¿½ï¿½cssï¿½ï¿½jsï¿½Ä¼ï¿½ï¿½æ±¾,WEB-INF/viewsÒ²ï¿½ÇºÍ±ï¿½ï¿½ï¿½htmlï¿½Ä¼ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ò»ï¿½ï¿½*/
 //});
 //
-////¿ª·¢¹¹½¨
+////ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //gulp.task('dev', function (done) {
 //    condition = false;
 //    runSequence(

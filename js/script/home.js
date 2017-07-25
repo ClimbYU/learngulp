@@ -14,5 +14,19 @@ var whiteBackground = {
   'backgroundColor': '#ffffff',
   'borderStyle': 'none'
 };
-console.log(whiteBackground)
+
+
+function findElementByName(name, options) {
+  var target;
+  for( var i in options) {
+    var op = options[i];
+    if( name == op.name){
+      target = op.element;
+      break;
+    }
+  }
+  return target
+}
+
+
 
